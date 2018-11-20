@@ -1,0 +1,24 @@
+{
+    "name": "ugowarembourg/compteurcycle",
+    "description": "",
+    "authors": [
+        {
+            "name": "Ugo Warembourg",
+            "email": "u.warembourg@groupemaurizi.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "UgoWarembourg\\Compteurcycle\\": "src"
+        }
+    },
+    "minimum-stability": "dev-master",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "UgoWarembourg\\Compteurcycle\\CompteurcycleServiceProvider"
+            ]
+        }
+    }
+}
