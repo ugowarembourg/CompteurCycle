@@ -3,6 +3,7 @@
 namespace UgoWarembourg\Compteurcycle;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Event;
 
 class CompteurcycleServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class CompteurcycleServiceProvider extends ServiceProvider
     {
         include __DIR__.'/routes.php';
         $this->app->make('UgoWarembourg\Compteurcycle\Controllers\CompteurcycleController');
+        Event::listen('App\Events\MSMessageEvent', '\UgoWarembourg\Compteurcycle\EventListener\CompteurCycleEventListener');
 
     }
 }

@@ -11,3 +11,4 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/widget/infos/{id}', 'UgoWarembourg\Compteurcycle\Controllers\CompteurcycleController@postInfo');
 
 });
+    Route::post('/widget/commande/{id}', 'UgoWarembourg\Compteurcycle\Controllers\CompteurcycleController@postCommande');

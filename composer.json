@@ -12,7 +12,7 @@
             "UgoWarembourg\\Compteurcycle\\": "src"
         }
     },
-    "minimum-stability": "dev-master",
+    "minimum-stability": "stable",
     "require": {},
     "extra": {
         "laravel": {

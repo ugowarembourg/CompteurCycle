@@ -67,20 +67,59 @@
                     {{--</script>--}}
 
                     <button type="submit" class="btn btn-primary">Envoyer</button>
-
-
-
                 </form>
+
+                        <h3 style="margin-top: 8%">Lancement</h3><hr>
+                    <div class="btn-group" role="group" aria-label="..." style="margin-top: 1%; ">
+
+                        <form style="margin-right: 30%"  method="post" action="{{url('/widget/commande/'.$config->id)}}">
+                                <button type="submit" class="btn btn-success" value="208" name="action"><span class="glyphicon glyphicon-play"> Start</span></button>
+                        </form>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="..." style="margin-top: 1%; ">
+                        <form style="margin-right: 30%"  method="post" action="{{url('/widget/commande/'.$config->id)}}">
+                                <button type="submit" class="btn btn-danger" value="209" name="action"><span class="glyphicon glyphicon-stop"> Stop</span></button>
+                        </form>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="..." style="margin-top: 1%; ">
+                        <form style="margin-right: 30%"  method="post" action="{{url('/widget/commande/'.$config->id)}}">
+                                <button type="submit" class="btn btn-warning" value="210" name="action"><span class="glyphicon glyphicon-retweet"> Restart</span></button>
+                        </form>
+                    </div>
+
 
             </div>
             <div class="col-lg-6" >
+                <ul class="nav nav-tabs" style="margin-top: 26px; margin-bottom: 7%">
+                    @if($vue==1)
 
-                <h3>Paramètres actuel</h3><hr>
-                <p> Temps ouverture : {{$config->temps_ouverture}}</p>
-                <p> Interval Cyclage : {{$config->interval_cyclage}}</p>
-                <p> Nombres d'erreus max : {{$config->nb_erreurs_max}}</p>
-                <p> Commentaire : {{$config->commentaire}}</p>
-                <p> Créé le : {{\Carbon\Carbon::parse($config->created_at)->format('d/m/Y H:i:s')}}</p>
+                    <li role="presentation" class="active"><a href="{{url('/widget/infos/'.$config->id.'&view=1')}}">Paramètres actuel</a></li>
+
+                    @else
+                    <li role="presentation"><a href="{{url('/widget/infos/'.$config->id.'?view=1')}}">Paramètres actuel</a></li>
+                    @endif
+                    @if($vue==2)
+                    <li role="presentation" class="active"><a href="{{url('/widget/infos/'.$config->id.'?view=2')}}">Erreurs</a></li>
+                    @else
+                    <li role="presentation"><a href="{{url('/widget/infos/'.$config->id.'?view=2')}}">Erreurs</a></li>
+                    @endif
+                </ul>
+
+                @if($vue==1)
+                    <p> Temps ouverture : {{$config->temps_ouverture}}</p>
+                    <p> Interval Cyclage : {{$config->interval_cyclage}}</p>
+                    <p> Nombres d'erreus max : {{$config->nb_erreurs_max}}</p>
+                    <p> Commentaire : {{$config->commentaire}}</p>
+                    <p> Créé le : {{\Carbon\Carbon::parse($config->created_at)->format('d/m/Y H:i:s')}}</p>
+                    @endif
+                @if($vue==2)
+
+                    @foreach($erreurs as $erreur)
+                        <p>La porte a etait en erreur le {{\Carbon\Carbon::parse($erreur->created_at)->format('d/m/Y  à H:i:s')}}</p>
+                    @endforeach
+
+                @endif
+
 
             </div>
         </div>

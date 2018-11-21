@@ -15,9 +15,10 @@ use App\Sensor;
 class CompteurCycle extends Sensor
 {
     public $types = [
-      'temps_ouverture' => 201,
-      'nb_erreurs_max' => 200,
-      'interval_cyclage' => 199,
+        'temps_ouverture' => 201,
+        'nb_erreurs_max' => 200,
+        'interval_cyclage' => 199,
+        'start' => 1,
     ];
     public function getWidget(\App\Widget $widget)
     {
@@ -58,6 +59,14 @@ class CompteurCycle extends Sensor
 
         $message->fromScratch($this->node_address, $this->sensor_address, 2, 0,  $this->types['nb_erreurs_max']);
         $message->setMessage($this->config->nb_erreurs_max);
+        MqttSender::sendMessage($message);
+    }
+
+    public function sendStart($valeur)
+    {
+        $message = new MSMessage(Message::first()->id);
+        $message->fromScratch($this->node_address, $this->sensor_address, 2, 0,  $valeur);
+        $message->setMessage(1);
         MqttSender::sendMessage($message);
     }
 

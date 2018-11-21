@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 use UgoWarembourg\Compteurcycle\Models\CompteurCycleState;
 
 
+
+
 class CompteurcycleController extends Controller
 {
     public function index(Request $request, $id)
@@ -62,15 +64,15 @@ class CompteurcycleController extends Controller
         {
             $date=null;
         }
+
         //dd($tempsouv,$intervalcycle,$nberreur,$commentaire,$date);
-
-
-
-
-
-
+        $erreurs =CompteurCycleErreur::orderBy('created_at', 'desc')->paginate(20);
+        //$erreur =$erreurs->orderBy('created_at', 'desc');dd($request);
+        //dd($erreurs->toArray());
         return view('compteurcycle::infos')->with([
             'config' => $config,
+            'vue' => $request->view,
+            'erreurs'=>$erreurs,
         ]);
 
     }
@@ -84,6 +86,7 @@ class CompteurcycleController extends Controller
            'commentaire' => 'required',
 
         ]);
+        //dd($request->toArray());
         $config = CompteurCycleConfig::find($id);
         $config->temps_ouverture = $request->tempsouv;
         $config->interval_cyclage = $request->intervalcycle;
@@ -96,6 +99,22 @@ class CompteurcycleController extends Controller
 
         return redirect()->back();
     }
+
+    public function postCommande($id, Request $request)
+    {
+//dd($request->toArray());
+        if($request->action)
+        {
+            $action = CompteurCycleConfig::find($id);
+            //$start = $request->start;
+            //dd($request->toArray());
+            $action->compteur->sendStart($request->action);
+        }
+
+        return redirect()->back();
+    }
+
+
 
 
 }
