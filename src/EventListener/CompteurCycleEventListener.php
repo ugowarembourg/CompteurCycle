@@ -5,6 +5,7 @@ namespace UgoWarembourg\Compteurcycle\EventListener;
 use App\Events\MSMessageEvent;
 use App\Sensor;
 use App\SensorFactory;
+use UgoWarembourg\Compteurcycle\Events\CompteurCycleEvent;
 use UgoWarembourg\Compteurcycle\Models\CompteurCycleConfig;
 use UgoWarembourg\Compteurcycle\Models\CompteurCycleErreur;
 
@@ -90,6 +91,10 @@ class CompteurCycleEventListener
                 $Conf->nb_cycles=$nbCycle;
                 $Conf->save();
             }
+
+            \Log::info('Envoi evenement Compteur');
+            $event = new CompteurCycleEvent($sensor, $Conf, $Conf->compteurCycleState);
+            event($event);
 
         }
     }

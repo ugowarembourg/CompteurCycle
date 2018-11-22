@@ -70,5 +70,10 @@ class CompteurCycle extends Sensor
         MqttSender::sendMessage($message);
     }
 
+    public function getJs()
+    {
+        return ['js/ugowarembourg/compteurcycle/compteurcycle.js'];
+    }
+
 
 }

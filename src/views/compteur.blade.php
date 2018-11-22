@@ -8,11 +8,5 @@
         <a class="btn btn-primary" style="margin-top: 10px" href="{{url('/widget/infos/'.$config->id.'?view=1')}}">Infos</a><hr>
         <img src="{{$state->image}}">
     <div style="margin-bottom: 8px">{{$state->name}}</div>
-
-
-
-
-
-
     </div>
 </div>

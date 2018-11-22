@@ -15,6 +15,11 @@ class CompteurCycleConfig extends Model
         return $this->belongsTo('UgoWarembourg\Compteurcycle\Models\CompteurCycle', 'sensor_id');
     }
 
+    public function compteurCycleState()
+    {
+        return $this->belongsTo('UgoWarembourg\Compteurcycle\Models\CompteurCycleState', 'compteur_cycle_state_id');
+    }
+
     public function sendConfig()
     {
 

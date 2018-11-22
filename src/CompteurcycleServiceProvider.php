@@ -14,6 +14,9 @@ class CompteurcycleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->publishes([
+            __DIR__.'/asset/js' => public_path('/js/ugowarembourg/compteurcycle'),
+        ], 'larahome-package');
         $this->loadViewsFrom(__DIR__.'/views', 'compteurcycle');
         $this->loadMigrationsFrom(__DIR__.'/migrations');
     }
