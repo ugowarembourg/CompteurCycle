@@ -5,6 +5,7 @@ namespace UgoWarembourg\Compteurcycle\EventListener;
 use App\Events\MSMessageEvent;
 use App\Sensor;
 use App\SensorFactory;
+use UgoWarembourg\Compteurcycle\Models\CompteurCycleConfig;
 use UgoWarembourg\Compteurcycle\Models\CompteurCycleErreur;
 
 class CompteurCycleEventListener
@@ -37,21 +38,35 @@ class CompteurCycleEventListener
         {
 
             $compteurcycle = SensorFactory::create($sensor->classname, $sensor->id);
+            $Conf = $compteurcycle->config;
+
             if ($sensor && $event->message->getCommand()==1 && $event->message->getType()== $this->types['ouverture'] )
             {
                \Log::info('porte en ouverture');
+
+               $Conf->compteur_cycle_state_id= 3;
+               $Conf->save();
             }
             if ($sensor && $event->message->getCommand()==1 && $event->message->getType()== $this->types['fermeture'] )
             {
                 \Log::info('porte en fermeture');
+
+                $Conf->compteur_cycle_state_id= 4;
+                $Conf->save();
             }
             if ($sensor && $event->message->getCommand()==1 && $event->message->getType()== $this->types['ouverte'] )
             {
                 \Log::info('porte ouverte');
+
+                $Conf->compteur_cycle_state_id= 2;
+                $Conf->save();
             }
             if ($sensor && $event->message->getCommand()==1 && $event->message->getType()== $this->types['fermee'] )
             {
                 \Log::info('porte fermee');
+
+                $Conf->compteur_cycle_state_id = 1;
+                $Conf->save();
             }
             if ($sensor && $event->message->getCommand()==1 && $event->message->getType()== $this->types['porteerreur'] )
             {
@@ -60,12 +75,20 @@ class CompteurCycleEventListener
                 $erreur->sensor_id = $sensor->id;
                 $erreur->erreur = 'La porte est en erreur';
                 $erreur->save();
-                
+
+
+                $Conf->compteur_cycle_state_id = 5;
+                $Conf->save();
 
             }
             if ($sensor && $event->message->getCommand()==1 && $event->message->getType()== $this->types['cycle'] )
             {
                 \Log::info('cycle');
+                \Log::info($event->message->getMessage());
+                $nbCycle= $event->message->getMessage();
+
+                $Conf->nb_cycles=$nbCycle;
+                $Conf->save();
             }
 
         }
