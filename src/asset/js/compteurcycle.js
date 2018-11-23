@@ -5,6 +5,6 @@ $(function() {
             console.log('CompteurCycle', e);
             $('.nb_cycle_'+e.config.sensor_id).text(e.config.nb_cycles);
             $('.image_'+e.config.sensor_id).attr('src', e.etat.image);
-            $('nom_'+e.config.sensor_id).text(e.etat.name);
+            $('.nom_'+e.config.sensor_id).text(e.etat.name);
         })
 });
