@@ -18,10 +18,10 @@ Tableau des messages MySensors:
 
 | Envois auto de l'etat de la porte |                                                |
 |-----------------------------------|------------------------------------------------|
-|             ouverture             | mysensors-out/1/0/1/0/24/Porte en Ouverture    |
+|             Ouverture             | mysensors-out/1/0/1/0/24/Porte en Ouverture    |
 |             Fermeture             | mysensors-out/1/0/1/0/25/Porte en Fermeture    |
-|               cycle               | mysensors-out/1/0/1/0/203/"le nombre de cycle" |
-|              ouverte              | mysensors-out/1/0/1/0/29/Porte Ouverte         |
+|               Cycle               | mysensors-out/1/0/1/0/203/"le nombre de cycle" |
+|              Ouverte              | mysensors-out/1/0/1/0/29/Porte Ouverte         |
 |               Fermée              | mysensors-out/1/0/1/0/28/Porte Fermee          |
 |               Erreur              | mysensors-out/1/0/1/0/100/Porte en Erreur      |
 
