@@ -34,3 +34,19 @@ Tableau des messages MySensors:
 |     Arreter     | mysensors-in/1/0/2/0/209/1      |
 |      Lancer     | mysensors-in/1/0/2/0/208/1      |
 |    Redémarrer   | mysensors-in/1/0/2/0/209/1      |
+
+# Installer le widget
+
+    1: composer require ugowarembourg/compteurcycle 
+    
+    2: php artisan migrate
+    
+    3: artisan vendor:publish --tag=larahome-package --force
+
+
+
+
+
+
+
+
