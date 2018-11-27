@@ -12,7 +12,7 @@ La page information, avec le formulaire pour modifier les paramètres et les anc
 ![widget](https://github.com/ugowarembourg/CompteurCycle/blob/master/screenshots/info.png)
 
 Déclaration automatique des erreurs.
-![widget](https://github.com/ugowarembourg/CompteurCycle/blob/master/screenshots/info.png)
+![widget](https://github.com/ugowarembourg/CompteurCycle/blob/master/screenshots/infoerreur.png)
 
 Tableau des messages MySensors:
 
