@@ -17,9 +17,46 @@ use UgoWarembourg\Compteurcycle\Models\CompteurCycleState;
 
 class CompteurcycleController extends Controller
 {
-    public function index(Request $request, $id)
+    public function postInfo($id, Request $request)
     {
-     //dd($request->toArray());
+        $this->validate($request,[
+           'tempsouv' => 'required|numeric',
+           'intervalcycle' => 'required|numeric',
+           'nberreur' => 'required|numeric',
+           'commentaire' => 'required',
+
+        ]);
+        //dd($request->toArray());
+        $config = CompteurCycleConfig::find($id);
+        $config->temps_ouverture = $request->tempsouv;
+        $config->interval_cyclage = $request->intervalcycle;
+        $config->nb_erreurs_max = $request->nberreur;
+        $config->commentaire = $request->commentaire;
+        $config->created_at = Carbon::now();
+        $config->save();
+
+        $config->compteur->sendConfig();
+
+
+    }
+
+    public function postCommande($id, Request $request)
+    {
+//dd($request->toArray());
+        if($request->action)
+        {
+            $action = CompteurCycleConfig::find($id);
+            //$start = $request->start;
+            //dd($request->toArray());
+            $action->compteur->sendStart($request->action);
+        }
+
+        return redirect()->back();
+    }
+
+
+        //dd($request->toArray());
+    public function index(Request $request, $id){
 
         $config = CompteurCycleConfig::find($id);
         //$state = CompteurCycleState::find();
@@ -62,8 +99,8 @@ class CompteurcycleController extends Controller
         }
         else
         {
-            $date=null;
         }
+        $date=null;
 
         //dd($tempsouv,$intervalcycle,$nberreur,$commentaire,$date);
         $erreurs =CompteurCycleErreur::orderBy('created_at', 'desc')->paginate(20);
@@ -75,43 +112,6 @@ class CompteurcycleController extends Controller
             'erreurs'=>$erreurs,
         ]);
 
-    }
-
-    public function postInfo($id, Request $request)
-    {
-        $this->validate($request,[
-           'tempsouv' => 'required|numeric',
-           'intervalcycle' => 'required|numeric',
-           'nberreur' => 'required|numeric',
-           'commentaire' => 'required',
-
-        ]);
-        //dd($request->toArray());
-        $config = CompteurCycleConfig::find($id);
-        $config->temps_ouverture = $request->tempsouv;
-        $config->interval_cyclage = $request->intervalcycle;
-        $config->nb_erreurs_max = $request->nberreur;
-        $config->commentaire = $request->commentaire;
-        $config->created_at = Carbon::now();
-        $config->save();
-
-        $config->compteur->sendConfig();
-
-        return redirect()->back();
-    }
-
-    public function postCommande($id, Request $request)
-    {
-//dd($request->toArray());
-        if($request->action)
-        {
-            $action = CompteurCycleConfig::find($id);
-            //$start = $request->start;
-            //dd($request->toArray());
-            $action->compteur->sendStart($request->action);
-        }
-
-        return redirect()->back();
     }
 
 

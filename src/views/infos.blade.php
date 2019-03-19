@@ -90,18 +90,18 @@
 
             </div>
             <div class="col-lg-6" >
-                <ul class="nav nav-tabs" style="margin-top: 26px; margin-bottom: 7%">
+                <ul class="nav nav-tabs" style="margin-top: 6px; margin-bottom: 7%">
                     @if($vue==1)
 
-                    <li role="presentation" class="active"><a href="{{url('/widget/infos/'.$config->id.'&view=1')}}">Paramètres actuel</a></li>
+                    <li role="nav-item" class="active"><a class="nav-link" href="{{url('/widget/infos/'.$config->id.'&view=1')}}">Paramètres actuel</a></li>
 
                     @else
-                    <li role="presentation"><a href="{{url('/widget/infos/'.$config->id.'?view=1')}}">Paramètres actuel</a></li>
+                    <li role="nav-item"><a class="nav-link" href="{{url('/widget/infos/'.$config->id.'?view=1')}}">Paramètres actuel</a></li>
                     @endif
                     @if($vue==2)
-                    <li role="presentation" class="active"><a href="{{url('/widget/infos/'.$config->id.'?view=2')}}">Erreurs</a></li>
+                    <li role="nav-item" class="active"><a class="nav-link" href="{{url('/widget/infos/'.$config->id.'?view=2')}}">Erreurs</a></li>
                     @else
-                    <li role="presentation"><a href="{{url('/widget/infos/'.$config->id.'?view=2')}}">Erreurs</a></li>
+                    <li role="nav-item"><a class="nav-link" href="{{url('/widget/infos/'.$config->id.'?view=2')}}">Erreurs</a></li>
                     @endif
                 </ul>
 

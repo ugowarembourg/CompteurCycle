@@ -28,7 +28,7 @@ class CompteurCycleEventListener
 
     public function handle(MSMessageEvent $event)
     {
-        \Log::useFiles(storage_path('/logs/compteurcycle.log'), 'info');
+        //\Log::useFiles(storage_path('/logs/compteurcycle.log'), 'info');
         \Log::info('Message recu');
         $msmessage = $event->message;
         $sensor = Sensor::where('node_address', '=', $event->message->getNodeId())
