@@ -6,6 +6,7 @@ use App\Events\MSMessageEvent;
 use App\Sensor;
 use App\SensorFactory;
 use UgoWarembourg\Compteurcycle\Events\CompteurCycleEvent;
+use UgoWarembourg\Compteurcycle\Models\CompteurCycle;
 use UgoWarembourg\Compteurcycle\Models\CompteurCycleConfig;
 use UgoWarembourg\Compteurcycle\Models\CompteurCycleErreur;
 
@@ -28,6 +29,7 @@ class CompteurCycleEventListener
 
     public function handle(MSMessageEvent $event)
     {
+
         //\Log::useFiles(storage_path('/logs/compteurcycle.log'), 'info');
         \Log::info('Message recu');
         $msmessage = $event->message;
@@ -87,8 +89,15 @@ class CompteurCycleEventListener
                 \Log::info('cycle');
                 \Log::info($event->message->getMessage());
                 $nbCycle= $event->message->getMessage();
-
-                $Conf->nb_cycles=$nbCycle;
+                if ($Conf->nb_cycle > $nbCycle)
+                {
+                    $Conf->nb_cycles+=$nbCycle;
+                    $compteurcycle->sendCycle($Conf->nb_cycles);
+                }
+                else
+                {
+                    $Conf->nb_cycles=$nbCycle;
+                }
                 $Conf->save();
             }
 

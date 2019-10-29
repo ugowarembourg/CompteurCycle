@@ -15,6 +15,7 @@ use App\Sensor;
 class CompteurCycle extends Sensor
 {
     public $types = [
+        'cycle' => 204,
         'temps_ouverture' => 201,
         'nb_erreurs_max' => 200,
         'interval_cyclage' => 199,
@@ -67,6 +68,13 @@ class CompteurCycle extends Sensor
         $message = new MSMessage(Message::first()->id);
         $message->fromScratch($this->node_address, $this->sensor_address, 2, 0,  $valeur);
         $message->setMessage(1);
+        MqttSender::sendMessage($message);
+    }
+    public function sendCycle($valeur)
+    {
+        $message = new MSMessage(Message::first()->id);
+        $message->fromScratch($this->node_address, $this->sensor_address, 2, 0,  $this->types['cycle']);
+        $message->setMessage($valeur);
         MqttSender::sendMessage($message);
     }
 
