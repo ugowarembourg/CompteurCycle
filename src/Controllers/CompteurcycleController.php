@@ -36,7 +36,7 @@ class CompteurcycleController extends Controller
         $config->save();
 
         $config->compteur->sendConfig();
-
+        return redirect()->back();
 
     }
 
