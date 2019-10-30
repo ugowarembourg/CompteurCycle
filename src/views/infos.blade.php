@@ -120,7 +120,7 @@
 
                 @endif
 
-
+                <iframe src="http://192.168.105.68/web/mobile.html" width="900px" height="550px" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
