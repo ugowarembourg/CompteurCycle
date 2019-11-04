@@ -103,7 +103,7 @@ class CompteurcycleController extends Controller
         $date=null;
 
         //dd($tempsouv,$intervalcycle,$nberreur,$commentaire,$date);
-        $erreurs =CompteurCycleErreur::orderBy('created_at', 'desc')->paginate(20);
+        $erreurs =CompteurCycleErreur::where('sensor_id',$config->sensor_id)->orderBy('created_at', 'desc')->paginate(20);
         //$erreur =$erreurs->orderBy('created_at', 'desc');dd($request);
         //dd($erreurs->toArray());
         return view('compteurcycle::infos')->with([
