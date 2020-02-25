@@ -97,7 +97,6 @@ class CompteurCycleEventListener
                 else
                 {
                     $Conf->nb_cycles+=$nbCycle;
-                    $compteurcycle->sendCycle($Conf->nb_cycles);$Conf->nb_cycles+=$nbCycle;
                     $compteurcycle->sendCycle($Conf->nb_cycles);
                 }
                 $Conf->save();
