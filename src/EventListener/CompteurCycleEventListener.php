@@ -89,7 +89,7 @@ class CompteurCycleEventListener
                 \Log::info('cycle');
                 \Log::info($event->message->getMessage());
                 $nbCycle= $event->message->getMessage();
-                if ($Conf->nb_cycle > $nbCycle)
+                if ($Conf->nb_cycles > $nbCycle)
                 {
                     $Conf->nb_cycles+=$nbCycle;
                     $compteurcycle->sendCycle($Conf->nb_cycles);
